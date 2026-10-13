@@ -18,9 +18,9 @@ fetch('./data/comidas.json')          // Ruta al archivo JSON
 
 const container = document.getElementById('comidaContainer');
 
-function mostrarComidas () {
+function mostrarComidas (lista) {
 
-comidas.forEach(element => {
+lista.forEach(element => {
   container.innerHTML += `
         <article class="card">
 
@@ -39,3 +39,45 @@ comidas.forEach(element => {
 });
 
 }
+
+const agregarComidaForm = document.getElementById("agregarComidaForm")
+
+agregarComidaForm.addEventListener("submit", (event) => {
+  
+alert("Comida agregada" + event.target.nombre.value)
+
+event.preventDefault ()
+
+let nuevaComida = {
+
+nombre: event.target.nombre.value,
+provincia: event.target.provincia.value,
+categoría:event.target.categoria.value,
+ingredientes: event.target.ingredientes.value.split(",")
+
+}
+
+comidas.push(nuevaComida)
+
+mostrarComidas (comidas)
+
+event.target.reset ()
+
+})
+
+
+const filtroCategoria = document.getElementById ("filtroCategoria")
+
+filtroCategoria.addEventListener("change", () =>{
+
+  let comidasFiltradas = comidas.filter(comida => {
+
+    return comida.categoria.includes(filtroCategoria.value)
+
+
+
+  })
+
+  mostrarComidas(comidasFiltradas)
+
+})
