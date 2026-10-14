@@ -1,13 +1,13 @@
 /*
     Cargar comidas en memoria desde el JSON
 */
-fetch('./data/comidas.json')          // Ruta al archivo JSON
+fetch('./data/comidas-extended.json')          // Ruta al archivo JSON
   .then(response => response.json())  // Convertir la respuesta en JSON
   .then(data => {                     // Aquí tienes acceso al JSON en formato de objeto JS
     console.log('Comidas cargadas desde JSON:');
     console.log(data);    
     comidas = data;
-    mostrarComidas()                   // Asignar el JSON a la variable comidas
+    mostrarComidas(comidas)                   // Asignar el JSON a la variable comidas
 
   })
   
@@ -67,12 +67,18 @@ event.target.reset ()
 
 
 const filtroCategoria = document.getElementById ("filtroCategoria")
+const filtroProvincia = document.getElementById ("filtroProvincia")
+const busqueda = document.getElementById ("buscador")
 
-filtroCategoria.addEventListener("change", () =>{
 
-  let comidasFiltradas = comidas.filter(comida => {
 
-    return comida.categoria.includes(filtroCategoria.value)
+function filtrar() {
+
+  let comidasFiltradas = comidas.filter(element => {
+
+    return element.categoria.includes(filtroCategoria.value)
+    && element.provincia.includes(filtroProvincia.value)
+    
 
 
 
@@ -80,4 +86,23 @@ filtroCategoria.addEventListener("change", () =>{
 
   mostrarComidas(comidasFiltradas)
 
-})
+}
+
+
+filtroCategoria.addEventListener("change", filtrar ())
+filtroCategoria.addEventListener("change", filtrar ())
+busqueda.addEventListener(input, buscar ())
+
+
+function buscar() {
+
+  let comidasFiltradas = comidas.filter(element => {
+    return element.nombre.toLowerCase.includes(busqueda.value.toLowerCase)
+    || element.provincia.toLowerCase.includes(filtroProvincia.value.toLowerCase)
+
+  })
+
+  mostrarComidas(comidasFiltradas)
+
+}
+

@@ -6,17 +6,25 @@
 }
 
 body {
-  height: 100vh;
+  height: 200vh;
+  width: 30ovh;
   
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-direction: row;
 
  
-  gap: 20px;
+  gap: 200px;
   background-color: rgb(236, 235, 235);
 
  
+}
+
+header {
+  height: 50vh;
+  width: 100%;
+  background-color: antiquewhite;
 }
 
 
