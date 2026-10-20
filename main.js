@@ -20,6 +20,8 @@ const container = document.getElementById('comidaContainer');
 
 function mostrarComidas (lista) {
 
+  container.innerHTML = ''
+
 lista.forEach(element => {
   container.innerHTML += `
         <article class="card">
@@ -52,7 +54,7 @@ let nuevaComida = {
 
 nombre: event.target.nombre.value,
 provincia: event.target.provincia.value,
-categoría:event.target.categoria.value,
+categoria:event.target.categoria.value,
 ingredientes: event.target.ingredientes.value.split(",")
 
 }
@@ -84,25 +86,28 @@ function filtrar() {
 
   })
 
-  mostrarComidas(comidasFiltradas)
-
-}
-
-
-filtroCategoria.addEventListener("change", filtrar ())
-filtroCategoria.addEventListener("change", filtrar ())
-busqueda.addEventListener(input, buscar ())
-
-
-function buscar() {
-
-  let comidasFiltradas = comidas.filter(element => {
-    return element.nombre.toLowerCase.includes(busqueda.value.toLowerCase)
-    || element.provincia.toLowerCase.includes(filtroProvincia.value.toLowerCase)
-
-  })
+  
 
   mostrarComidas(comidasFiltradas)
 
 }
 
+
+filtroCategoria.addEventListener("change", () => filtrar ())
+filtroProvincia.addEventListener("change", () => filtrar ())
+busqueda.addEventListener("input", () => buscar ())
+
+
+function buscar() 
+
+{let textoBusqueda = busqueda.value.toLowerCase();
+
+let comidasFiltradas = comidas.filter(element => {
+  return element.nombre.toLowerCase().includes(textoBusqueda) 
+      || element.provincia.toLowerCase().includes(textoBusqueda);
+});
+
+mostrarComidas(comidasFiltradas);
+}
+
+  
